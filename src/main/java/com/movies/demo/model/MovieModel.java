@@ -2,7 +2,7 @@ package com.movies.demo.model;
 
 import java.io.Serializable;
 
-public class Movie implements Serializable {
+public class MovieModel implements Serializable {
     private String name;
     private String genre;
     private String year;
