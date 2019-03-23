@@ -1,5 +1,3 @@
-insert into student
-values(10001,'Ranga', 'E1234567');
 
-insert into student
-values(10002,'Ravi', 'A1234568');
+insert into movie
+values('Top Gun', 'Action', '1986', 'PG-13', CURRENT_TIMESTAMP , CURRENT_TIMESTAMP );

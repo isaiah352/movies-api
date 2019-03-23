@@ -1,7 +1,11 @@
-create table student
+
+create table movie
 (
- id integer not null,
- name varchar(255) not null,
- passport_number varchar(255) not null,
- primary key(id)
+  name varchar(255) not null,
+  genre varchar(255) not null,
+  year_released varchar(4) not null,
+  rating varchar(10) not null,
+  last_updated_date TIMESTAMP not null,
+  created_date TIMESTAMP not null,
+  primary key(name)
 );
