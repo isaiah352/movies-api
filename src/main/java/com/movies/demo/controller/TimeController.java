@@ -17,6 +17,7 @@ public class TimeController {
     @Autowired
     TimeService timeService;
 
+    // Returns time formatted as hh:mm a, with the leading zero removed from the time when applicable.
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<TimeResponseModel> getTime() throws RestClientException {
         return new ResponseEntity<>(timeService.getTime(), HttpStatus.OK);
