@@ -5,9 +5,9 @@ import com.movies.demo.dao.MovieDao;
 import com.movies.demo.model.MovieModel;
 import com.movies.demo.model.MovieResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class MovieServiceImpl implements MovieService{
                     message.setMessage(Constants.CREATE_SUCCEEDED);
                 }
             }
-        } catch(HttpServerErrorException.InternalServerError e) {
+        } catch(DataAccessException e) {
             System.out.println(PUT_MOVIE_EXCEPTION + e);
             return message;
         }
