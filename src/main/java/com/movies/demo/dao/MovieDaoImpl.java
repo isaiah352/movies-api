@@ -2,7 +2,6 @@ package com.movies.demo.dao;
 
 import com.movies.demo.common.Constants;
 import com.movies.demo.model.MovieModel;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
@@ -13,11 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class MovieDAOImpl implements MovieDao{
+public class MovieDaoImpl implements MovieDao{
 
     private NamedParameterJdbcTemplate jdbc;
 
-    public MovieDAOImpl(NamedParameterJdbcTemplate jdbc) {
+    public MovieDaoImpl(NamedParameterJdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 

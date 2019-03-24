@@ -1,8 +1,9 @@
 package com.movies.demo.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class TimeResponseModel {
+public class TimeResponseModel implements Serializable {
+
     String time;
 
     public String getTime() { return time; }

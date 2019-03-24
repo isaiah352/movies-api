@@ -1,6 +1,8 @@
 package com.movies.demo.model;
 
-public class MovieResponseModel {
+import java.io.Serializable;
+
+public class MovieResponseModel implements Serializable {
     String message;
 
     public String getMessage() { return message; }

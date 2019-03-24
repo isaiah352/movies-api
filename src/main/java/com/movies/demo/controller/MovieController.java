@@ -13,23 +13,23 @@ import org.springframework.web.client.RestClientException;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/api/movie/")
+@RequestMapping("/api/movie")
 public class MovieController {
 
     @Autowired
     MovieService movieService;
 
-    @PutMapping
+    @RequestMapping(value = {"/create", "/update"}, method = RequestMethod.PUT)
     public ResponseEntity<MovieResponseModel> putMovie(@RequestBody @Validated MovieModel movie) throws RestClientException {
         return new ResponseEntity<>(movieService.putMovie(movie), HttpStatus.OK);
     }
 
-    @DeleteMapping
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public ResponseEntity<MovieResponseModel> deleteMovie(@RequestBody MovieModel movie) throws RestClientException {
         return new ResponseEntity<>(movieService.deleteMovieByName(movie.getName()), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "list/", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<MovieModel>> listMovies() throws RestClientException {
         return new ResponseEntity<>(movieService.getMovieList(), HttpStatus.OK);
     }
