@@ -49,7 +49,12 @@ public class MovieServiceImpl implements MovieService{
     @Transactional
     public MovieResponseModel deleteMovieByName(String name) {
         MovieResponseModel message = new MovieResponseModel();
-        message.setMessage(movieDao.deleteMovieByName(name));
+        int result = movieDao.deleteMovieByName(name);
+        if(result > 0) {
+            message.setMessage(Constants.RECORD_DELETED_SUCCESSFULLY);
+        } else {
+            message.setMessage(Constants.RECORD_NOT_FOUND);
+        }
         return message;
     }
 

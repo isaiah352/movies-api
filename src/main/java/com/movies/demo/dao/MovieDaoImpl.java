@@ -21,19 +21,11 @@ public class MovieDaoImpl implements MovieDao{
     }
 
     @Override
-    public String deleteMovieByName(String name) {
-        String retVal = "";
+    public int deleteMovieByName(String name) {
         final String DELETE_SQL = "DELETE FROM movie WHERE name = :name";
         Map<String, Object> params = new HashMap<>();
         params.put("name", name);
-        int result = 0;
-        result = jdbc.update(DELETE_SQL, params);
-        if(result > 0) {
-            retVal = Constants.RECORD_DELETED_SUCCESSFULLY;
-        } else {
-            retVal = Constants.RECORD_NOT_FOUND;
-        }
-        return retVal;
+        return jdbc.update(DELETE_SQL, params);
     }
 
     @Override
