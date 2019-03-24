@@ -1,12 +1,12 @@
 package com.movies.demo.service;
 
 import com.movies.demo.model.MovieModel;
-import org.springframework.stereotype.Service;
-
 import javax.xml.ws.WebServiceException;
+import java.util.ArrayList;
 
 public interface MovieService {
 
-    MovieModel createMovie(MovieModel movie) throws WebServiceException;
-
+    String putMovie(MovieModel movie) throws WebServiceException;
+    String deleteMovieByName(String name) throws WebServiceException;
+    ArrayList<MovieModel> getMovieList() throws WebServiceException;
 }
