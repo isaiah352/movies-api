@@ -1,6 +1,7 @@
 package com.movies.demo.controller;
 
 import com.movies.demo.model.MovieModel;
+import com.movies.demo.model.MovieResponseModel;
 import com.movies.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,13 +20,13 @@ public class MovieController {
     MovieService movieService;
 
     @PutMapping
-    public ResponseEntity<String> putMovie(@RequestBody @Validated MovieModel movie) throws RestClientException {
+    public ResponseEntity<MovieResponseModel> putMovie(@RequestBody @Validated MovieModel movie) throws RestClientException {
         return new ResponseEntity<>(movieService.putMovie(movie), HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteMovie(@RequestParam String movieName) throws RestClientException {
-        return new ResponseEntity<>(movieService.deleteMovieByName(movieName), HttpStatus.OK);
+    public ResponseEntity<MovieResponseModel> deleteMovie(@RequestBody MovieModel movie) throws RestClientException {
+        return new ResponseEntity<>(movieService.deleteMovieByName(movie.getName()), HttpStatus.OK);
     }
 
     @RequestMapping(value = "list/", method = RequestMethod.GET)

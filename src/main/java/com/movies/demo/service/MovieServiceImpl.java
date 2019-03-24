@@ -3,6 +3,7 @@ package com.movies.demo.service;
 import com.movies.demo.common.Constants;
 import com.movies.demo.dao.MovieDao;
 import com.movies.demo.model.MovieModel;
+import com.movies.demo.model.MovieResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,33 +21,36 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     @Transactional
-    public String putMovie(MovieModel movie) {
+    public MovieResponseModel putMovie(MovieModel movie) {
         int result = 0;
-        String responseMessage = Constants.TRANSACTION_FAILED;
+        MovieResponseModel message = new MovieResponseModel();
+        message.setMessage(Constants.TRANSACTION_FAILED);
         try {
             MovieModel existingMovie = movieDao.getMovieByName(movie.getName());
             if(existingMovie.getName() != null) {
                 result = movieDao.updateMovie(movie);
                 if(result > 0) {
-                    responseMessage = Constants.UPDATE_SUCCEEDED;
+                    message.setMessage(Constants.UPDATE_SUCCEEDED);
                 }
             } else {
                 result = movieDao.createMovie(movie);
                 if(result > 0) {
-                    responseMessage = Constants.CREATE_SUCCEEDED;
+                    message.setMessage(Constants.CREATE_SUCCEEDED);
                 }
             }
         } catch(HttpServerErrorException.InternalServerError e) {
             System.out.println(PUT_MOVIE_EXCEPTION + e);
-            return responseMessage;
+            return message;
         }
-        return responseMessage;
+        return message;
     }
 
     @Override
     @Transactional
-    public String deleteMovieByName(String name) {
-        return movieDao.deleteMovieByName(name);
+    public MovieResponseModel deleteMovieByName(String name) {
+        MovieResponseModel message = new MovieResponseModel();
+        message.setMessage(movieDao.deleteMovieByName(name));
+        return message;
     }
 
     @Override
