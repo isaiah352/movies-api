@@ -13,13 +13,17 @@ import org.springframework.web.client.RestClientException;
 import java.util.ArrayList;
 
 @RestController
+// I made the routing "movie" in accordance with the assignments requirements, however, REST best practices would stipulate that this should be the plural "movies".
 @RequestMapping("/api/movie")
 public class MovieController {
 
     @Autowired
     MovieService movieService;
 
-    // This endpoint serves to create when a record is new, and update when it exists. It is exposed through both /create and /update.
+    /*This endpoint is stuck in between being a use case for POST and PUT
+      In accordance with the requirements, the URI of this endpoint does not contain an id as a URI param which makes it more like POST
+      However, I designed this endpoint to be idempotent like a PUT should be
+      I compromised by making this a PUT as is, and under different circumstances would include the movie id as a URI param to make this usage of PUT more restful*/
     @RequestMapping(value = {"/create", "/update"}, method = RequestMethod.PUT)
     public ResponseEntity<MovieResponseModel> putMovie(@RequestBody @Validated MovieModel movie) throws RestClientException {
         return new ResponseEntity<>(movieService.putMovie(movie), HttpStatus.OK);
